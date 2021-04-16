@@ -80,9 +80,11 @@ class Section implements SectionInterface
         }
         $buffer = ob_get_clean();
         $this->content = ($this->mode & self::MODE_APPEND) ? $buffer.$this->content : $buffer;
-        if ($this->mode & self::MODE_OUTPUT) {
-            //echo $this->content();
-        }
+        
+        // disable echoing section - yoshkinawa
+        /*if ($this->mode & self::MODE_OUTPUT) {
+            echo $this->content();
+        }*/
     }
 
     /**
@@ -102,9 +104,11 @@ class Section implements SectionInterface
         }
         $buffer = ob_get_clean();
         $this->content = ($this->mode & self::MODE_REPLACE) ? $this->content : $buffer.$this->content;
-        if ($this->mode & self::MODE_OUTPUT) {
-            //echo $this->content();
-        }
+        
+        // disable echoing section - yoshkinawa
+        /*if ($this->mode & self::MODE_OUTPUT) {
+            echo $this->content();
+        }*/
     }
 
     /**
