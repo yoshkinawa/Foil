@@ -198,6 +198,10 @@ class Engine implements EngineInterface, TemplateAware, FinderAware
      */
     public function render($template, array $data = [])
     {
+        
+        // skip file existance checking (must use pull paths) - yoshkinawa
+        return $this->doRender($template, $data);
+        
         $isString = is_string($template);
 
         if ($isString && is_file($template)) {
