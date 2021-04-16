@@ -209,10 +209,13 @@ class Template implements AliasAllowedTemplateInterface
      */
     public function layout($layout, array $data = [], array $only = null)
     {
-        $file = file_exists($layout) ? $layout : $this->engine->find($layout);
+        // skip file existence check (must use full paths) - yoshkinawa
+        $file = $layout;
+        
+        /*$file = file_exists($layout) ? $layout : $this->engine->find($layout);
         if (! $file) {
             throw new InvalidArgumentException('Layout must be a valid file name.');
-        }
+        }*/
         $this->layout = $file;
         $this->layoutData[$file] = ['data' => $data, 'only' => $only];
         // listener for this event makes sections work in non-output mode
