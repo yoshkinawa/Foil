@@ -231,6 +231,10 @@ class Template implements AliasAllowedTemplateInterface
     {
         $this->engine->fire('f.template.prerender', $this);
         $this->setData(array_merge($this->data(), $data));
+        
+        // access current template data from global scope - yoshkinawa
+        $GLOBALS[ 'foilTemplateData' ] = $this->data();
+        
         $output = $this->collect($this->path());
         while ($this->layoutPath()) {
             $layout = $this->layoutPath();
@@ -241,6 +245,10 @@ class Template implements AliasAllowedTemplateInterface
             $this->layout = null;
             // listener for this event makes sections work in output mode
             $this->engine->fire('f.template.renderlayout', $layout, $this);
+            
+            // access current template data from global scope - yoshkinawa
+            $GLOBALS[ 'foilTemplateData' ] = $this->data();
+            
             $output = $this->collect($layout);
         }
 
